@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hex Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+        
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .wrapper {
+            color: rgb(224, 224, 224);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #hexClockTitle {
+            font-size: 6em;
+        }
+
+        .text {
+            font-size: 4.5em;
+            text-align: center;
+        }
+
+        #hexTimeDisplay {
+            border: 2px rgb(180, 180, 180) dotted;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 0;
+        }
+
+        #currentDateDisplay {
+            color: rgba(180, 180, 180, 0.377);
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
+    <script>
+        var refresh = 1000;
+
+        function updateTime() {
+            var date = new Date();
+            var timeEl = document.getElementById("hexTimeDisplay");
+            var dateEl = document.getElementById("currentDateDisplay");
+
+            var timeString = date.toLocaleTimeString("en-GB", { timeZone: "Europe/London" });
+            var dateString = date.toLocaleDateString("en-GB", { timeZone: "Europe/London" });
+
+            var timeHex = '#' + timeString.replace(/:/g, '');
+
+            dateEl.innerHTML = dateString;
+            timeEl.innerHTML = timeHex;
+            document.body.style.backgroundColor = timeHex;
+        }
+
+        setInterval(updateTime, refresh);
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <h3 id="hexClockTitle">Hex Clock</h3>
+        <div>
+            <p class="text" id="currentDateDisplay"></p>
+            <p class="text" id="hexTimeDisplay"></p>
+        </div>
+    </div>
+</body>
+</html>
